@@ -1,9 +1,18 @@
-# linux-mint-installation-case-study
-A real-world Linux troubleshooting journey covering EFI, GRUB, Secure Boot, MOK errors, and Linux Mint installation issues on an old Dell laptop.
+# Linux Mint EFI/MOK Troubleshooting - Dell Inspiron 3505
+
+## Overview
+
+This repository documents a real-world troubleshooting case involving Linux Mint boot failures caused by EFI/MOK related issues on a Dell Inspiron 3505.
+
+The purpose of this repository is to document the investigation process, findings and lessons learned while diagnosing Linux boot problems.
+
+---
 
 ## Goal
 
-Install Linux Mint 22.3 Cinnamon on a Dell Inspiron 3505 by replacing Windows 11.
+Install Linux Mint 22.3 Cinnamon on a Dell Inspiron 3505.
+
+---
 
 ## Hardware
 
@@ -12,44 +21,79 @@ Install Linux Mint 22.3 Cinnamon on a Dell Inspiron 3505 by replacing Windows 11
 - RAM: 8 GB
 - SSD: SK hynix 256 GB NVMe
 - HDD: 1 TB
+- Firmware: UEFI
+
+---
 
 ## Symptoms
 
-- Linux Mint installer crashed during "Copying files"
+The following errors were encountered while attempting to boot Linux Mint:
+
 - Failed to start MokManager
-- EFI/boot related issues
-- Failed to import MOK state (`import_mok_state() failed`)
+- `import_mok_state() failed`
+- `mmx64.efi` related boot errors
 
-## Troubleshooting Steps
+Linux Mint was unable to boot correctly.
 
-1. Recreated the bootable USB using Rufus.
-2. Verified BIOS and Secure Boot settings.
-3. Investigated EFI boot entries.
-4. Reset BIOS defaults (F9).
-5. Checked Linux Mint compatibility mode.
-6. Investigated `mmx64.efi` and `grubx64.efi` boot files.
-7. Collected logs instead of relying on guesses.
+---
+
+## Investigation Process
+
+The following steps were performed:
+
+1. Checked BIOS settings.
+2. Verified Secure Boot configuration.
+3. Recreated the Linux Mint bootable media.
+4. Investigated EFI boot entries.
+5. Reset BIOS defaults (F9).
+6. Examined EFI boot files.
+
+---
+
+## Workaround
+
+During troubleshooting, modifying the EFI boot file allowed Linux Mint to boot successfully.
+
+Path:
+
+```text
+EFI/BOOT/
+```
+
+Change performed:
+
+```text
+grubx64.efi -> mmx64.efi
+```
+
+> Note:
+>
+> This was a hardware-specific workaround that worked on my Dell Inspiron 3505.
+>
+> This should not be considered a universal solution for every Linux Mint installation.
+
+---
 
 ## Lessons Learned
 
-- Read exact error messages.
-- Verify before applying fixes.
-- Use logs to find the root cause.
-- BIOS, EFI and bootloader configuration are closely related.
+- Always read the exact error message.
+- Avoid changing multiple BIOS settings at once.
+- Verify information before applying fixes.
+- Investigate EFI boot files before assuming hardware failure.
+- Troubleshoot step by step instead of guessing.
 
-## Status
-
-🟡 In Progress
-
-The installer still crashes during "Copying files". Further investigation will be done using installer logs.
-
-## Environment
-
-- OS: Linux Mint 22.3 Cinnamon
-- Firmware: UEFI
-- Secure Boot: Disabled
-- Boot mode: Compatibility mode
+---
 
 ## Disclaimer
 
-This repository documents my personal troubleshooting journey. The exact solution may vary depending on hardware and firmware versions.
+This repository documents my personal troubleshooting experience.
+
+Hardware, firmware versions and Linux distributions may behave differently on other systems.
+
+Use the information for educational purposes and verify changes before applying them to your own device.
+
+---
+
+## Status
+
+✅ EFI/MOK boot issue resolved.

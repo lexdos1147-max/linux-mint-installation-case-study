@@ -42,3 +42,14 @@ Install Linux Mint 22.3 Cinnamon on a Dell Inspiron 3505 by replacing Windows 11
 🟡 In Progress
 
 The installer still crashes during "Copying files". Further investigation will be done using installer logs.
+
+## Environment
+
+- OS: Linux Mint 22.3 Cinnamon
+- Firmware: UEFI
+- Secure Boot: Disabled
+- Boot mode: Compatibility mode
+
+## Disclaimer
+
+This repository documents my personal troubleshooting journey. The exact solution may vary depending on hardware and firmware versions.
